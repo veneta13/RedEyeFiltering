@@ -11,14 +11,14 @@
 class Solution {
 public:
   void compute([[maybe_unused]]std::vector<PackedImage> &images) {
-    FunctionTracer<std::chrono::milliseconds> tracer("compute", "ms");
-    std::vector<CoordinateMap> patternMaps;
+      FunctionTracer<std::chrono::milliseconds> tracer("compute", "ms");
+      CoordinateMap patternMap;
 
-    for (int i = 0; i < EYE_PATTERNS_COUNT; i++) {
-        patternMaps.emplace_back(CoordinateMap());
-        mapPattern(EYE_PATTERNS[i], patternMaps[i]);
-    }
-
+      for (int i = 0; i < EYE_PATTERNS_COUNT; i++) {
+          Coordinates coordinates;
+          mapPattern(EYE_PATTERNS[i], coordinates);
+          patternMap[EYE_PATTERNS[i]] = coordinates;
+      }
   }
 
   void compute([[maybe_unused]]std::vector<StrideImage> &images) {

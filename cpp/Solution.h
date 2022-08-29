@@ -19,6 +19,10 @@ public:
           mapPattern(EYE_PATTERNS[i], coordinates);
           patternMap[EYE_PATTERNS[i]] = coordinates;
       }
+
+      for (auto & image : images) {
+          searchImage(patternMap, image);
+      }
   }
 
   void compute([[maybe_unused]]std::vector<StrideImage> &images) {

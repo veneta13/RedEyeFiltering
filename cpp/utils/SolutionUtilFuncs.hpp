@@ -1,7 +1,11 @@
-#ifndef READEYEFILTERING_FUNCFINDPATTERN_HPP
-#define READEYEFILTERING_FUNCFINDPATTERN_HPP
+#ifndef READEYEFILTERING_SOLUTIONUTILFUNCS_HPP
+#define READEYEFILTERING_SOLUTIONUTILFUNCS_HPP
+
+#include <vector>
+#include <map>
 
 #include "EyePatterns.h"
+#include "Image.h"
 
 // x and y-axis coordinates of character in pattern
 // the origin of the coordinate system is the upper left corner

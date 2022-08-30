@@ -6,6 +6,7 @@
 
 //NOTE: don't forget that some symbols need to be escaped
 constexpr int32_t EYE_PATTERN_COL_SIZE = 5;
+constexpr int32_t EYE_PATTERN_ROW_SIZE = 5;
 using EyePattern = std::array<const char*, EYE_PATTERN_COL_SIZE>;
 
 constexpr EyePattern EYE_PATTERN_1 {

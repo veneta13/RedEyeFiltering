@@ -6,7 +6,7 @@
 
 #include "utils/Image.h"
 #include "utils/FunctionTracer.h"
-#include "utils/SolutionUtilFuncs.hpp"
+#include "utils/SolutionUtilFuncs.h"
 
 class Solution {
 public:

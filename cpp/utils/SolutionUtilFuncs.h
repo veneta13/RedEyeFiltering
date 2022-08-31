@@ -102,7 +102,7 @@ bool checkCoordinates(CoordinateMap& patternMaps, PackedImage& image, int curren
 
 
 // Search for and replace red value in patterns in image
-void searchImage(CoordinateMap &patternMaps, PackedImage &image) {
+void searchAndReplaceImage(CoordinateMap &patternMaps, PackedImage &image) {
 
     // Iterate over image pixels
     for (int i = 0; i <= (image.resolution.height - EYE_PATTERN_COL_SIZE); i++) {

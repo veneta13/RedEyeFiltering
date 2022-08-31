@@ -25,7 +25,7 @@ public:
 
       // Iterate over images
       for (auto & image : images) {
-          searchImage(patternMap, image);
+          searchAndReplaceImage(patternMap, image);
       }
   }
 };

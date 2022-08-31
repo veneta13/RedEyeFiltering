@@ -22,11 +22,11 @@ using CoordinateMap = std::map<EyePattern, Coordinates>;
 void mapPattern(const EyePattern& pattern, Coordinates& coordinates) {
 
     // Iterate over pattern symbols
-    for (int i = 0; i < EYE_PATTERN_ROW_SIZE; i++) {
-        for (int j = 0; j < EYE_PATTERN_COL_SIZE; j++) {
+    for (int x = 0; x < EYE_PATTERN_ROW_SIZE; x++) {
+        for (int y = 0; y < EYE_PATTERN_COL_SIZE; y++) {
 
             // Get the current symbol
-            char currentSymbol = pattern[i][j];
+            char currentSymbol = pattern[x][y];
 
             // If the current symbol is whitespace - skip
             if (currentSymbol == ' ') {
@@ -34,7 +34,7 @@ void mapPattern(const EyePattern& pattern, Coordinates& coordinates) {
             }
 
             // Add the coordinates of the current pixel in coordinate vector
-            coordinates.emplace_back(Coordinate({i, j}));
+            coordinates.emplace_back(Coordinate({x, y}));
         }
     }
 }

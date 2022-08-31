@@ -105,7 +105,7 @@ bool checkCoordinates(CoordinateMap& patternMaps, PackedImage& image, int curren
 void searchAndReplaceImage(CoordinateMap &patternMaps, PackedImage &image) {
 
     // Iterate over image pixels
-    for (int x = 0; x <= (image.resolution.width - EYE_PATTERN_COL_SIZE); x++) {
+    for (int x = 0; x <= (image.resolution.width - EYE_PATTERN_ROW_SIZE); x++) {
         for (int y = 0; y <= (image.resolution.height - EYE_PATTERN_COL_SIZE); y++) {
 
             // If pattern is found on current coordinates skip its pixels

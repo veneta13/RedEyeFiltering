@@ -41,7 +41,7 @@ void mapPattern(const EyePattern& pattern, Coordinates& coordinates) {
 
 
 /// Check if current pattern is found on these coordinates
-bool findPattern(const Coordinates& patternCoords, PackedImage& image, int currentY, int currentX) {
+bool findPattern(const Coordinates& patternCoords, PackedImage& image, int currentX, int currentY) {
 
     // For each pixel in pattern check if the red value is over 200
     for (const auto & patternCoord : patternCoords) {
@@ -64,7 +64,7 @@ bool findPattern(const Coordinates& patternCoords, PackedImage& image, int curre
 
 
 // Go over pixels in pattern and reduce red value by 150
-void handlePattern(const Coordinates& patternCoords, PackedImage& image, int currentY, int currentX) {
+void handlePattern(const Coordinates& patternCoords, PackedImage& image, int currentX, int currentY) {
 
     // Reduce red value of all pixels mapped onto pattern by 150
     for (const auto & patternCoord : patternCoords) {
@@ -82,16 +82,16 @@ void handlePattern(const Coordinates& patternCoords, PackedImage& image, int cur
 
 
 // Check if any pattern is found on coordinates
-bool checkCoordinates(CoordinateMap& patternMaps, PackedImage& image, int currentY, int currentX) {
+bool checkCoordinates(CoordinateMap& patternMaps, PackedImage& image, int currentX, int currentY) {
 
     // Iterate over available patterns
     for (int i = EYE_PATTERNS_COUNT - 1; i >= 0; i--) {
 
         // Check if the current pattern is found
-        if (findPattern(patternMaps[EYE_PATTERNS[i]], image, currentY, currentX)) {
+        if (findPattern(patternMaps[EYE_PATTERNS[i]], image, currentX, currentY)) {
 
             // If there is a pattern - reduce red value
-            handlePattern(patternMaps[EYE_PATTERNS[i]], image, currentY, currentX);
+            handlePattern(patternMaps[EYE_PATTERNS[i]], image, currentX, currentY);
             return true;
         }
     }
@@ -109,7 +109,7 @@ void searchAndReplaceImage(CoordinateMap &patternMaps, PackedImage &image) {
         for (int y = 0; y <= (image.resolution.height - EYE_PATTERN_COL_SIZE); y++) {
 
             // If pattern is found on current coordinates skip its pixels
-            if (checkCoordinates(patternMaps, image, y, x)) {
+            if (checkCoordinates(patternMaps, image, x, y)) {
                 y += EYE_PATTERN_COL_SIZE;
             }
         }

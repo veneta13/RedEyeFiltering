@@ -41,14 +41,14 @@ void mapPattern(const EyePattern& pattern, Coordinates& coordinates) {
 
 
 /// Check if current pattern is found on these coordinates
-bool findPattern(const Coordinates& patternCoords, PackedImage& image, int currentH, int currentW) {
+bool findPattern(const Coordinates& patternCoords, PackedImage& image, int currentY, int currentX) {
 
     // For each pixel in pattern check if the red value is over 200
     for (const auto & patternCoord : patternCoords) {
 
         // Calculate absolute coordinates of pixel
-        int currImageX = currentW + patternCoord.first;
-        int currImageY = currentH + patternCoord.second;
+        int currImageX = currentX + patternCoord.first;
+        int currImageY = currentY + patternCoord.second;
 
         Pixel* currPixel = &image.pixels[currImageY * image.resolution.width + currImageX];
 
@@ -64,14 +64,14 @@ bool findPattern(const Coordinates& patternCoords, PackedImage& image, int curre
 
 
 // Go over pixels in pattern and reduce red value by 150
-void handlePattern(const Coordinates& patternCoords, PackedImage& image, int currentH, int currentW) {
+void handlePattern(const Coordinates& patternCoords, PackedImage& image, int currentY, int currentX) {
 
     // Reduce red value of all pixels mapped onto pattern by 150
     for (const auto & patternCoord : patternCoords) {
 
         // Calculate absolute coordinates of pixel
-        int currImageX = currentW + patternCoord.first;
-        int currImageY = currentH + patternCoord.second;
+        int currImageX = currentX + patternCoord.first;
+        int currImageY = currentY + patternCoord.second;
 
         Pixel* currPixel = &image.pixels[currImageY * image.resolution.width + currImageX];
 
@@ -82,16 +82,16 @@ void handlePattern(const Coordinates& patternCoords, PackedImage& image, int cur
 
 
 // Check if any pattern is found on coordinates
-bool checkCoordinates(CoordinateMap& patternMaps, PackedImage& image, int currentH, int currentW) {
+bool checkCoordinates(CoordinateMap& patternMaps, PackedImage& image, int currentY, int currentX) {
 
     // Iterate over available patterns
     for (int i = EYE_PATTERNS_COUNT - 1; i >= 0; i--) {
 
         // Check if the current pattern is found
-        if (findPattern(patternMaps[EYE_PATTERNS[i]], image, currentH, currentW)) {
+        if (findPattern(patternMaps[EYE_PATTERNS[i]], image, currentY, currentX)) {
 
             // If there is a pattern - reduce red value
-            handlePattern(patternMaps[EYE_PATTERNS[i]], image, currentH, currentW);
+            handlePattern(patternMaps[EYE_PATTERNS[i]], image, currentY, currentX);
             return true;
         }
     }
@@ -105,12 +105,12 @@ bool checkCoordinates(CoordinateMap& patternMaps, PackedImage& image, int curren
 void searchAndReplaceImage(CoordinateMap &patternMaps, PackedImage &image) {
 
     // Iterate over image pixels
-    for (int i = 0; i <= (image.resolution.height - EYE_PATTERN_COL_SIZE); i++) {
-        for (int j = 0; j <= (image.resolution.width - EYE_PATTERN_COL_SIZE); j++) {
+    for (int x = 0; x <= (image.resolution.width - EYE_PATTERN_COL_SIZE); x++) {
+        for (int y = 0; y <= (image.resolution.height - EYE_PATTERN_COL_SIZE); y++) {
 
             // If pattern is found on current coordinates skip its pixels
-            if (checkCoordinates(patternMaps, image, i, j)) {
-                j += EYE_PATTERN_COL_SIZE;
+            if (checkCoordinates(patternMaps, image, y, x)) {
+                y += EYE_PATTERN_COL_SIZE;
             }
         }
     }

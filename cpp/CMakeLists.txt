@@ -3,4 +3,4 @@ project(ReadEyeFiltering)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(cpp main.cpp utils/Image.cpp)
+add_executable(solution main.cpp utils/Image.cpp)

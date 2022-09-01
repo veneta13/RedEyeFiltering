@@ -13,19 +13,19 @@ public:
   void compute([[maybe_unused]]std::vector<PackedImage> &images) {
       FunctionTracer<std::chrono::milliseconds> tracer("compute", "ms");
 
-      // Mapping patterns onto their coordinates vector representations
-      CoordinateMap patternMap;
+      // Coordinates vector representations of the patterns
+      PatternCoordinates patternCoordinates;
 
-      // For each pattern calculate coordinate vector and map
+      // Create coordinate vectors for each pattern
       for (int i = 0; i < EYE_PATTERNS_COUNT; i++) {
           Coordinates coordinates;
           mapPattern(EYE_PATTERNS[i], coordinates);
-          patternMap[EYE_PATTERNS[i]] = coordinates;
+          patternCoordinates.emplace_back(coordinates);
       }
 
       // Iterate over images
       for (auto & image : images) {
-          searchAndReplaceImage(patternMap, image);
+          searchAndReplaceImage(patternCoordinates, image);
       }
   }
 };
